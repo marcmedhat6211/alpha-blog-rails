@@ -4,5 +4,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   #request type, route name, controller, action
   get 'about', to: 'pages#about'
+  # only show dyh y3ny hatly bs el route el taba3 el show action w eliminate el ba2y
+  resources :articles, only: [:show]
 end
 
