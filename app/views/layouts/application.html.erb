@@ -11,9 +11,8 @@
   </head>
 
   <body>
-    <% flash.each do |name, msg| %>
-      <%= msg %>
-    <% end %>
+    <%# here i'll have to define the full path because i am in the layouts dir %>
+    <%= render 'layouts/messages' %>
     <%= yield %>
   </body>
 </html>

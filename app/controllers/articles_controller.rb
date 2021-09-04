@@ -1,11 +1,13 @@
 class ArticlesController < ApplicationController
 
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
   
   def show
     #el params dyh hya el shayla el parameters el da5la fel url w hwa bey7otaha f hash
     # so 3ashan t3raf tgyb el param mn el hash btektebha as below
     # the @ before the article converts the regular variable to an instance variable to be able to send it to the template
-    @article = Article.find(params[:id])
+
+    # @article = Article.find(params[:id])
   end
 
   # /articles
@@ -24,7 +26,7 @@ class ArticlesController < ApplicationController
   # /articles/:id/edit
   # GET Request
   def edit
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
   end
 
   # /articles
@@ -38,7 +40,7 @@ class ArticlesController < ApplicationController
     # @article = Article.new(params.require(:article).permit(:title, :description))
 
     # in our case e7na just 3andena el params el bterga3 hya el title wel description f we just have to permit them as below
-    @article = Article.new(params.require(:article).permit(:title, :description))
+    @article = Article.new(article_params)
     #save it to the database
     if @article.save
 
@@ -60,8 +62,8 @@ class ArticlesController < ApplicationController
   # PATCH Request
   # PUT Request
   def update
-    @article = Article.find(params[:id])
-    if @article.update(params.require(:article).permit(:title, :description))
+    # @article = Article.find(params[:id])
+    if @article.update(article_params)
       flash[:notice] = "Article was updated successfully"
       redirect_to @article
     else
@@ -72,10 +74,21 @@ class ArticlesController < ApplicationController
   # /articles/:id
   # DELETE Request
   def destroy
-    @article = Article.find(params[:id])
+    # @article = Article.find(params[:id])
     @article.destroy
 
     redirect_to articles_path
+  end
+
+  # private dyh m3naha en 2y 7aga t7tyha is private w msh lazem a7otelha end wala 7aga
+  private
+
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  def article_params
+    params.require(:article).permit(:title, :description)
   end
 
 end
