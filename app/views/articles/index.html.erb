@@ -5,16 +5,26 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
-            <th>Actions</th>
+            <th colspan="3">Actions</th>
         </tr>
     </thead>
 
     <tbody>
+      <%= link_to 'Create New Article', new_article_path %>
+      <br>
+      <br>
       <% @articles.each do |article| %>
         <tr>
           <td><%= article.title %></td>
           <td><%= article.description %></td>
-          <td>Placeholder</td>
+          <%# link_to: generates an anchor tag
+              Delete: text on the anchor tag
+              article_path(article): dyh 3ashan adylo el path w lazem a pass el id, mmkn a2ool article.id aw article bs w hwa hayefham
+              method: :delete: dyh lazem a2olo keda 3ashan otherwise kol el hay3melo en hwa hayroo7 3ala el show route
+           %>
+          <td><%= link_to 'Show', article_path(article) %></td>
+          <td><%= link_to 'Edit', edit_article_path(article) %></td>
+          <td><%= link_to 'Delete', article_path(article), method: :delete, data: {confirm: "Are you sure ?"}  %></td>
         </tr>
       <% end %>
     </tbody>

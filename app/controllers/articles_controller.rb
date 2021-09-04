@@ -69,4 +69,13 @@ class ArticlesController < ApplicationController
     end
   end
 
+  # /articles/:id
+  # DELETE Request
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+
+    redirect_to articles_path
+  end
+
 end
