@@ -1,4 +1,4 @@
-<h1>Create a New Article</h1>
+<h1>Edit Article</h1>
 
 <% if @article.errors.any? %>
   <h2>The following errors prevented the article from being saved</h2>
@@ -12,10 +12,10 @@
 <% end %>
 <%# 
 articles_path dh el hwa el index route
-scope dh el model name
+model dyh hena bet5allyh y keep track en dh el edit route, y3ny mn el a5er 3ashan el data el kanet mwgooda fel form l kol article tezhar fel form lazem a specify the model
 local: true hay5aly el form te3mel http post request 3ady msh ajax reqest
 %>
-<%= form_with scope: @article, url: articles_path do |f| %>
+<%= form_with(model: @article, local: true) do |f| %>
   <p>
     <%= f.label :title %> <br/>
     <%= f.text_field :title %>

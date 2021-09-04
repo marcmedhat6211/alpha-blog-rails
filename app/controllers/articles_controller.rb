@@ -8,15 +8,27 @@ class ArticlesController < ApplicationController
     @article = Article.find(params[:id])
   end
 
+  # /articles
+  # GET Request
   def index
     @articles = Article.all
   end
 
+  # /articles/new
+  # GET Request
   def new
     #dyh ana lazem a7otaha 3ashan awl mara ba3mel fyha hit lel new route mabyeb2ash fyh variable esmo @article
     @article = Article.new
   end
 
+  # /articles/:id/edit
+  # GET Request
+  def edit
+    @article = Article.find(params[:id])
+  end
+
+  # /articles
+  # POST Request
   def create
     #dh 3ashan lw 3ayz ashoof el gy gwa el params as a json object
     # render plain: params[:title]
@@ -41,6 +53,19 @@ class ArticlesController < ApplicationController
       redirect_to @article
     else
       render 'new'
+    end
+  end
+
+  # /articles/:id
+  # PATCH Request
+  # PUT Request
+  def update
+    @article = Article.find(params[:id])
+    if @article.update(params.require(:article).permit(:title, :description))
+      flash[:notice] = "Article was updated successfully"
+      redirect_to @article
+    else
+      render 'edit'
     end
   end
 
