@@ -1,5 +1,4 @@
 <div class="container">
-
   <%# 
     articles_path dh el hwa el index route
     model dyh hena bet5allyh y keep track en dh el edit route, y3ny mn el a5er 3ashan el data el kanet mwgooda fel form l kol article tezhar fel form lazem a specify the model
@@ -19,13 +18,15 @@
           <%= f.label :description, class: "col-2 col-form-label text-light" %>
           <div class="col-10">
             <%= f.text_area :description, rows: 10, class: "form-control shadow rounded", placeholder: "Article Description" %>
-          </div>    
+          </div>
         </div>
         <div class="form-group row justify-content-center">
           <%= f.submit "Save Article", class: "btn btn-outline-light btn-lg" %>
         </div>
       <% end %>
     </div>
-    <%= link_to '[ Cancel and return to articles listing ]', articles_path, class: "text-info" %>
+    <div class="mb-3">
+      <%= link_to '[ Cancel and return to articles listing ]', articles_path, class: "text-info" %>
+    </div>
   </div>
 </div>
