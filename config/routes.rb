@@ -11,5 +11,8 @@ Rails.application.routes.draw do
   # and resources here means: for ex article is a resource
   # REST - Representational state transfer - mapping HTTP verbs (get, post, put/patch, delete)
   resources :articles
+  get 'signup', to: 'users#new'
+  post 'users', to: 'users#create'
+  resources :users, except: [:new]
 end
 
