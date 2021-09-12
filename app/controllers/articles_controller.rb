@@ -42,7 +42,7 @@ class ArticlesController < ApplicationController
     # in our case e7na just 3andena el params el bterga3 hya el title wel description f we just have to permit them as below
     @article = Article.new(article_params)
     #dh code temp keda l7ad bs ma5alas el authentication system
-    @article.user = User.first
+    @article.user = current_user # ba7ot en lama el user dh ye3mel el article dh, a assign el user lel article bta3o
     #save it to the database
     if @article.save
 
