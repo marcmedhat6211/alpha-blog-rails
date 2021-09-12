@@ -1,6 +1,11 @@
 class ArticlesController < ApplicationController
 
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :require_user, except: [:show, :index]
+  # we've put this require_same_user method after the require_user method because the require_same_user requires that 
+  # the current_user be defined, so if you put this method before the require_user method the code will blow up if user
+  # is logged out because he doesn't know who the current_user is
+  before_action :require_same_user, only: [:edit, :update, :destroy]
   
   def show
     #el params dyh hya el shayla el parameters el da5la fel url w hwa bey7otaha f hash
@@ -91,6 +96,13 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :description)
+  end
+
+  def require_same_user
+    if current_user != @article.user
+      flash[:alert] = "You can only edit or delete your own article"
+      redirect_to @article
+    end
   end
 
 end
