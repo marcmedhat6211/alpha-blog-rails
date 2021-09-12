@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # any method here will be available for all controllers
 
   # ana ba7ot el satr dh to say en el method dyh kaman mmkn asta5demha as a helper function in my views
-  helper_method: :current_user, :logged_in?
+  helper_method :current_user, :logged_in?
 
   # ana shelt el method dyh mn el helper file and i've put it here to be able to use it in all controllers
   def current_user

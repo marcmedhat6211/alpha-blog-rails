@@ -1,7 +1,5 @@
 <h1 class="text-center mt-4">Alpha Bloggers</h1>
-
 <%= render 'shared/pagination', obj: @users %>
-
 <div class="container">
   <div class="row justify-content-md-center mt-4">
     <div class="col-8">
@@ -12,14 +10,16 @@
     <div class="row justify-content-md-center mt-4">
       <div class="col-8">
         <div class="card text-center shadow mb-5 bg-white rounded">
-           <div class="card-header font-italic">
+          <div class="card-header font-italic">
             <%= link_to user.username, user %>
           </div>
           <div class="card-body">
             <h5 class="card-title"><%= link_to gravatar_for(user, size: 150), user %></h5>
             <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
             <%= link_to 'View profile', user, class: "btn btn-outline-success" %>
-            <%= link_to 'Edit profile', edit_user_path(user), class: "btn btn-outline-info" %>
+            <% if logged_in? && user == current_user %>
+              <%= link_to 'Edit profile', edit_user_path(user), class: "btn btn-outline-info" %>
+            <% end %>
           </div>
           <div class="card-footer text-muted">
             <small>
@@ -31,5 +31,4 @@
     </div>
   <% end %>
 </div>
-
 <%= render 'shared/pagination', obj: @users %>
