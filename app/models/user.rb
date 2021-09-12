@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   # abl ma t save el email fel db e3melo lower case
   before_save { self.email = email.downcase }
-  has_many :articles
+  # dependent destroy means that anytime a user will be deleted, all articles and anything related to that user will be deleted
+  has_many :articles, dependent: :destroy
   validates :username, presence: true, 
                        uniqueness: {case_sensitive: false}, 
                        length: { minimum: 3, maximum: 25 }
