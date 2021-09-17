@@ -22,4 +22,20 @@ class CreateCategoryTest < ActionDispatch::IntegrationTest
     # so what this line is saying --> look for 'Sports' in the html body
     assert_match "Sports", response.body
   end
+
+  test "get new category form and reject invalid category submission" do
+    # the first thing we go the the new form route
+    get "/categories/new"
+    # making sure that the response is success
+    assert_response :success
+    # making sure that a category is created by checking the category count
+    assert_no_difference 'Category.count' do
+      post categories_path, params: { category: { name: " " } }
+    end
+    # first we make sure that word errors which is in the errors partial is there in the html body
+    assert_match "errors", response.body
+    # assert_select makes sure that this element exists in the page
+    assert_select 'div.alert'
+    assert_select 'h4.alert-heading'
+  end
 end
