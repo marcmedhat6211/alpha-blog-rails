@@ -20,13 +20,15 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  # test "should create category" do
-  #   assert_difference('Category.count') do
-  #     post categories_url, params: { category: {  } }
-  #   end
-
-  #   assert_redirected_to category_url(Category.last)
-  # end
+  test "should create category" do
+    # this checks if there is a change that happened to the categories by counting them
+    assert_difference('Category.count', 1) do
+      # the params here are whatever is submitted by the form
+      post categories_url, params: { category: { name: "Travel" } }
+    end
+    # it will redirect to whatever the last category that was just created
+    assert_redirected_to category_url(Category.last)
+  end
 
   test "should show category" do
     get category_url(@category)
