@@ -6,6 +6,13 @@
         <div class="card-header font-italic">
           By <%= @article.user.username %>
           <%= link_to gravatar_for(@article.user), @article.user %>
+          <% if @article.categories.any? %>
+            <%# here rails will understand that he's gonna iterate over all the categories and display the from the categories partial %>
+            <%# and it's gonna make a category object in my category partial %>
+            <div class="mt-2">
+              <%= render @article.categories %>
+            </div>
+          <% end %>
         </div>
         <div class="card-body">
           <h5 class="card-title"><%= @article.title %></h5>
