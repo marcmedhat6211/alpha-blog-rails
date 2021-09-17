@@ -10,4 +10,9 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def sign_in_as(user)
+    # here we're just signing the user in by posting to the login path which puts the user id to the session
+    # and the password provided here is the same as the password provided in the categories controller test setup method
+    post login_path, params: { session: { email: user.email, password: "password" } }
+  end
 end
