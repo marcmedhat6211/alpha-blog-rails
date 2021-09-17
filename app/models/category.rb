@@ -4,4 +4,7 @@ class Category < ApplicationRecord
 
   # name can not have duplicates with the same name twice
   validates_uniqueness_of :name
+
+  has_many :article_categories
+  has_many :articles, through: :article_categories
 end
